@@ -30,22 +30,20 @@ fn partition(array: &mut [i64]) -> usize {
             left += 1;
         }
     }
-    // pivot is not in the "middle"
-    if left != pivot_index {
-        // element in the "middle"
-        let element = array[left];
+    // element in the "middle"
+    let element = array[left];
+    if left < pivot_index {
         // pivot is on the right
-        if left < pivot_index {
-            if element > pivot {
-                // swap pivot with left
-                array.swap(pivot_index, left);
-                pivot_index = left;
-            } else {
-                // swap pivot with element after left
-                array.swap(pivot_index, left + 1);
-                pivot_index = left + 1;
-            }
-        } else
+        if element > pivot {
+            // swap pivot with left
+            array.swap(pivot_index, left);
+            pivot_index = left;
+        } else {
+            // swap pivot with element after left
+            array.swap(pivot_index, left + 1);
+            pivot_index = left + 1;
+        }
+    } else if left > pivot_index {
         // pivot is on the left
         if element < pivot {
             // swap pivot with left
